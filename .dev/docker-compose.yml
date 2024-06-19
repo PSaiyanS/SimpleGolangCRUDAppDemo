@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  mysql:
+    image: "mysql:8.3"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: test123
+      MYSQL_DATABASE: test10
+      MYSQL_USER: test10
+      MYSQL_PASSWORD: test123
+    volumes:
+      - mysql:/var/lib/mysql
+      - mysql-log:/var/log/mysql
+    command:
+      - --general-log=1
+      - --general-log-file=/var/log/mysql/mysql.log
+    ports:
+      - "127.0.0.1:3309:3306"
+volumes:
+  mysql:
+  mysql-log:

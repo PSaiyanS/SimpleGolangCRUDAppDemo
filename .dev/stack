@@ -1,0 +1,54 @@
+#!/bin/bash
+
+PROJECT='test10'
+
+__usage="
+Development tool for $PROJECT project
+
+Usage: $(basename "$0") [cmd]
+
+Commands:
+      start                              Start $PROJECT
+      up                                 Start $PROJECT dependencies
+      down                               Stop $PROJECT dependencies
+
+Options:
+  -h, --help                             Show usage
+"
+
+while [[ $# -gt 0 ]]; do case $1 in
+  start) cmd="start";;
+  up) cmd="up";;
+  down) cmd="down";;
+  -h|--help) echo "$__usage"; exit 0;;
+  *) echo "Unknown parameter: $1"; exit 1;;
+esac; shift; done
+
+up() {
+  echo "================================================================================"
+  echo "Starting $PROJECT dependencies"
+  echo "================================================================================"
+  docker-compose -p "$PROJECT" -f .dev/docker-compose.yml up -d
+}
+
+down() {
+  echo "================================================================================"
+  echo "Stopping $PROJECT dependencies"
+  echo "================================================================================"
+  docker-compose -p "$PROJECT" -f .dev/docker-compose.yml down
+}
+
+start() {
+  up
+  echo "================================================================================"
+  echo "Starting $PROJECT"
+  echo "================================================================================"
+  source .dev/local.env
+  go run cmd/main.go -template -c configs/config.yaml
+  down
+}
+
+if [ "$cmd" == "start" ]; then start
+elif [ "$cmd" == "up" ]; then up
+elif [ "$cmd" == "down" ]; then down
+fi
