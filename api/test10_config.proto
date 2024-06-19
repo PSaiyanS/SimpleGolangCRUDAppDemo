@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package test10.config;
+
+option go_package = "test10/pkg/config;test10";
+
+import "validate/validate.proto";
+import "logger/api/logger.proto";
+import "carbon/api/carbon.proto";
+import "database/api/database.proto";
+
+message Config {
+  greyhole.carbon.Listener listener = 1 [ (validate.rules).message = {required : true} ];
+  greyhole.logger.Logger logger = 2 [ (validate.rules).message = {required : true} ];
+  // add config for init & using database vào message Config
+  greyhole.database.Database database = 3 [(validate.rules).message = {required: true}];
+  
+}

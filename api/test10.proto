@@ -1,0 +1,128 @@
+syntax = "proto3";
+
+package test10;
+
+option go_package = "test10/api;test10";
+
+service Test10 {
+    rpc Ping(PingRequest) returns (PingRespond) ;
+    //User
+    rpc UserCreate(UserCreateRequest) returns (UserCreateRespond) ;
+    rpc UserList(UserListRequest) returns (UserListRespond) ;
+    rpc UserUpdate(UserUpdateRequest) returns (UserUpdateRespond) ;
+    rpc UserDelete(UserDeleteRequest) returns (UserDeleteRespond) ;
+    rpc UserGetById(UserGetByIdRequest) returns (UserGetByIdRespond) ;
+    //Room
+    rpc RoomCreate(RoomCreateRequest) returns (RoomCreateRespond) ;
+    rpc RoomList(RoomListRequest) returns (RoomListRespond) ;
+    rpc RoomUpdate(RoomUpdateRequest) returns (RoomUpdateRespond) ;
+    rpc RoomDelete(RoomDeleteRequest) returns (RoomDeleteRespond) ;
+    rpc RoomGetById(RoomGetByIdRequest) returns (RoomGetByIdRespond) ;
+
+}
+
+message PingRequest{
+    string message = 1;
+}
+message PingRespond{
+    string message = 1;
+}
+
+message User {
+    int64 id = 1;
+    string username = 2;
+    string password = 3;
+    string email = 4;
+}
+
+
+
+
+
+
+message UserCreateRequest{
+    User user = 1 ;
+}
+
+message UserCreateRespond{
+    string message = 1   ; 
+    User user = 2 ;
+}
+
+message UserListRequest{
+    int64 offset = 1;
+    int64 limit = 2;
+}
+message UserListRespond{
+    repeated User users = 1;
+    int64 total_count = 2;
+}
+message UserUpdateRequest{
+    User user = 1;
+}
+message UserUpdateRespond{
+    string message = 1;
+    User user = 2;
+}
+message UserDeleteRequest{
+    int64 id = 1;
+}
+message UserDeleteRespond{
+    string message = 1;
+}
+message UserGetByIdRequest{
+    int64 id = 1;
+}
+message UserGetByIdRespond{
+    User user = 1;
+}
+
+message Room {
+    int64 id = 1;
+    string name = 2;
+}
+
+message RoomCreateRequest{
+    Room room = 1 ;
+}
+
+message RoomCreateRespond{
+    string message = 1   ; 
+    Room room = 2 ;
+}
+
+message RoomListRequest{
+    int64 offset = 1;
+    int64 limit = 2;
+}
+message RoomListRespond{
+    repeated Room rooms = 1;
+    int64 total_count = 2;
+}
+message RoomUpdateRequest{
+    Room room = 1;
+}
+message RoomUpdateRespond{
+    string message = 1;
+    Room room = 2;
+}
+message RoomDeleteRequest{
+    int64 id = 1;
+}
+message RoomDeleteRespond{
+    string message = 1;
+}
+message RoomGetByIdRequest{
+    int64 id = 1;
+}
+message RoomGetByIdRespond{
+    Room room = 1;
+}
+
+message Message {
+    int64 id = 1;
+    string content = 2;
+    string user_id = 3;
+    string room_id = 4;
+}
+

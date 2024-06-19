@@ -1,0 +1,23 @@
+listener:
+  tcp:
+    address: 0.0.0.0
+    port: 8080
+    secure: false
+
+logger:
+  pretty: true
+  level: DEBUG
+database:
+  auth_method: ${DATABASE_AUTH_METHOD} # DATABASE_AUTH_METHOD_AWS_IAM
+  host: ${DATABASE_HOST}
+  port: 3309
+  name: ${DATABASE_NAME}
+  username: ${DATABASE_USERNAME}
+  password: ${DATABASE_PASSWORD}
+  aws_region: ${DATABASE_AWS_REGION}
+  debug: false
+  tracing_enabled: true
+  max_idle_conns: 5
+  max_open_conns: 5
+  conn_max_life_time: 3 # minutes
+  conn_max_idle_time: 3 # minutes
